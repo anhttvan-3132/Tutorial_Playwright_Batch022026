@@ -38,7 +38,24 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
+    // Setup project để chạy .setup.ts files
     {
+      name: 'chromium',
+      testMatch: /.*\.setup\.ts$/,  //  Nhận diện .setup.ts files
+      use: { ...devices['Desktop Chrome'] }
+    },
+
+    // Main test projects
+    {
+      name: 'firefox',
+      use: {
+        ...devices['Desktop Firefox'],
+        storageState: 'playwright/.auth/user.json'  // Sử dụng auth state
+      },
+      dependencies: ['chromium'],  // Chạy setup trước
+    },
+
+    /*{
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
     },
@@ -51,7 +68,7 @@ export default defineConfig({
     {
       name: 'webkit',
       use: { ...devices['Desktop Safari'] },
-    },
+    },*/
 
     /* Test against mobile viewports. */
     // {
