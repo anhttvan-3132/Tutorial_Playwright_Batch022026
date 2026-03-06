@@ -37,23 +37,27 @@ export default defineConfig({
   },
 
   /* Configure projects for major browsers */
-  projects: [
-    // Setup project để chạy .setup.ts files
-    {
-      name: 'chromium',
-      testMatch: /.*\.setup\.ts$/,  //  Nhận diện .setup.ts files
-      use: { ...devices['Desktop Chrome'] }
-    },
+ 
+    projects: [
 
-    // Main test projects
-    {
-      name: 'firefox',
-      use: {
-        ...devices['Desktop Firefox'],
-        storageState: 'playwright/.auth/user.json'  // Sử dụng auth state
-      },
-      dependencies: ['chromium'],  // Chạy setup trước
+  // PROJECT 1: Setup login
+  {
+    name: 'setup',
+    testMatch: /.*\.setup\.ts/,
+    use: { ...devices['Desktop Chrome'] }
+  },
+
+  // PROJECT 2: Test chính
+  {
+    name: 'firefox',
+    use: {
+      ...devices['Desktop Firefox'],
+      storageState: 'playwright/.auth/user.json'
     },
+    dependencies: ['setup'],
+  }
+
+],
 
     /*{
       name: 'chromium',
@@ -89,7 +93,7 @@ export default defineConfig({
     //   name: 'Google Chrome',
     //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
     // },
-  ],
+  
 
   /* Run your local dev server before starting the tests */
   // webServer: {
