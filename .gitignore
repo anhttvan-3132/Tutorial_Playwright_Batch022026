@@ -1,9 +1,22 @@
-/node_modules/*
-
-# Playwright
+# Node
 node_modules/
-/test-results/
-/playwright-report/
-/blob-report/
-/playwright/.cache/
-/playwright/.auth/
+
+# Playwright reports
+test-results/
+playwright-report/
+blob-report/
+
+# Playwright cache & auth
+playwright/.cache/
+playwright/.auth/
+
+# Screenshots
+screenshots/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
